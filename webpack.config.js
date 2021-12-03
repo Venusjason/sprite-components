@@ -37,7 +37,7 @@ tailPkgs.forEach((pkg) => {
     entry,
     output: {
       filename: '[name].js',
-      library: `bwfe_${pkg.toLowerCase().replace(/( |^)[a-z]/g, (L) => L.toUpperCase())}`,
+      library: `Bw${pkg.toLowerCase().replace(/( |^)[a-z]/g, (L) => L.toUpperCase())}`,
       libraryTarget: 'umd',
       path: path.resolve(__dirname, 'packages', pkg, 'dist'),
       globalObject: 'this',
