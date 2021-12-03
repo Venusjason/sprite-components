@@ -1,4 +1,6 @@
 {
+  "name": "sprite",
+  "description": "博物有道前端组件库 sprite",
   "private": true,
   "license": "MIT",
   "workspaces": [
