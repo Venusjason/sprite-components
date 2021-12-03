@@ -1,0 +1,28 @@
+{
+  "name": "preview-images",
+  "version": "0.0.1",
+  "description": "",
+  "keywords": [
+    "react",
+    "taro",
+    "小程序"
+  ],
+  "main": "lib/index.js",
+  "module": "es/index.js",
+  "types": "lib/index.d.ts",
+  "files": [
+    "lib",
+    "es",
+    "dist"
+  ],
+  "browserslist": [
+    "last 2 versions",
+    "Firefox ESR",
+    "> 1%",
+    "ie >= 11"
+  ],
+  "peerDependencies": {
+    "react": ">=16.9.0"
+  }
+
+}
