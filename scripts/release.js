@@ -37,7 +37,7 @@ async function release() {
 
   // Check npm registry
   logStep('check npm registry');
-  const userRegistry = execa.sync('npm', ['config', 'get', 'registry']).stdout;
+  const userRegistry = execa.sync('sudo npm', ['config', 'get', 'registry']).stdout;
   console.log(execa.sync('npm', ['config', 'get', 'registry']));
   console.log(`your npm ${userRegistry}`);
   if (userRegistry.includes('https://registry.yarnpkg.com/')) {
