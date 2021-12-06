@@ -31,7 +31,7 @@ const isDeploy = process.env.SITE_DEPLOY === 'TRUE';
 export default {
   title: 'Sprite',
   mode: 'site',
-  logo: 'https://gw.alipayobjects.com/zos/antfincdn/upvrAjAPQX/Logo_Tech%252520UI.svg',
+  logo: 'https://s4.aconvert.com/convert/p3r68-cdx67/axyt7-0km7f.svg',
   extraBabelPlugins: [
     [
       'import',
@@ -94,8 +94,8 @@ export default {
     'zh-CN': [
       null,
       {
-        title: 'GitHub',
-        path: 'https://github.com/MrXujiang/best-cps',
+        title: 'gitlab',
+        path: 'http://gitlab.d.bowuyoudao.com/bwfe-pkgs/sprite-components',
       },
     ],
   },

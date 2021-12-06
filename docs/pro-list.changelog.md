@@ -1,5 +1,5 @@
 ---
-title: ProList - 更新日志
+title: @sprite/preview-images - 更新日志
 nav:
   title: 更新日志
   path: /changelog
@@ -9,7 +9,7 @@ group:
 
 # Change Log
 
-## @ant-design/pro-list@1.14.1
+<!-- ## @ant-design/pro-list@1.14.1
 
 `2021-09-17`
 
@@ -174,4 +174,4 @@ group:
 
 `2020-08-14`
 
-- 🎨 style: list selected 时 hover 样式 ([@WynterDing](https://github.com/WynterDing))[#178](https://github.com/ant-design/pro-components/pull/178)
+- 🎨 style: list selected 时 hover 样式 ([@WynterDing](https://github.com/WynterDing))[#178](https://github.com/ant-design/pro-components/pull/178) -->
