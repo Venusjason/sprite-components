@@ -128,7 +128,7 @@ export default {
     '/components': [
       {
         title: '架构设计',
-        children: ['components.md', 'schema.md'],
+        children: ['components.md'],
       },
       {
         title: '通用',
