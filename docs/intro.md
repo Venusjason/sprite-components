@@ -77,7 +77,7 @@ nav:
 
 ### 一些约定
 
-我们要求覆盖 antd 、taro-ui 等第三方ui库 的样式必须要使用 `.@{ant-prefix}` 变量来生成类名，在 js 中使用如下代码来配置实现。
+我们要求覆盖 antd 、taro-ui 等第三方 ui 库 的样式必须要使用 `.@{ant-prefix}` 变量来生成类名，在 js 中使用如下代码来配置实现。
 
 ```tsx | pure
 const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);

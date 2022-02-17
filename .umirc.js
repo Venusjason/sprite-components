@@ -12,7 +12,7 @@ const pkgList = readdirSync(join(__dirname, 'packages')).filter(
 console.log(pkgList);
 
 const alias = pkgList.reduce((pre, pkg) => {
-  pre[`@bwfe/${pkg}`] = join(__dirname, 'packages', pkg, 'src/index.tsx');
+  pre[`@sprite/${pkg}`] = join(__dirname, 'packages', pkg, 'src/index.tsx');
   return {
     ...pre,
   };
@@ -132,12 +132,9 @@ export default {
       },
       {
         title: '通用',
-        children: [
-          'preview-images'
-        ],
+        children: ['vue-hooks'],
       },
     ],
-    
   },
   webpack5: {},
   mfsu: !isDeploy ? {} : undefined,

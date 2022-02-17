@@ -18,7 +18,7 @@ const externals = isCI
   ? tailPkgs.reduce((pre, value) => {
       return {
         ...pre,
-        [`@bwfe/${value}`]: path.join(__dirname, `packages/${value}/src/index.tsx`),
+        [`@sprite/${value}`]: path.join(__dirname, `packages/${value}/src/index.tsx`),
       };
     }, {})
   : {};
@@ -37,7 +37,7 @@ tailPkgs.forEach((pkg) => {
     entry,
     output: {
       filename: '[name].js',
-      library: `Bw${pkg.toLowerCase().replace(/( |^)[a-z]/g, (L) => L.toUpperCase())}`,
+      library: `sprite_${pkg.toLowerCase().replace(/( |^)[a-z]/g, (L) => L.toUpperCase())}`,
       libraryTarget: 'umd',
       path: path.resolve(__dirname, 'packages', pkg, 'dist'),
       globalObject: 'this',

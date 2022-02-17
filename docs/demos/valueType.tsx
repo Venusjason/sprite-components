@@ -70,9 +70,5 @@ type DataItem = {
 
 export default () => {
   const [valueType, setValueType] = useState<ProFieldValueType>('text');
-  return (
-    <>
-      
-    </>
-  );
+  return <></>;
 };

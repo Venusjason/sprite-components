@@ -3,7 +3,6 @@
   "npmClient": "yarn",
   "useWorkspaces": true,
   "changelog": {
-    "repo": "MrXujiang/best-cps",
     "cacheDir": ".changelog"
   },
   "ignoreChanges": [
