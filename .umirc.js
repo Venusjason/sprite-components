@@ -30,7 +30,7 @@ const isDeploy = process.env.SITE_DEPLOY === 'TRUE';
 
 export default {
   title: 'a-sprite',
-  base: 'https://venusjason.github.io/a-sprite-doc-site/',
+  base: '/a-sprite-doc-site/',
   publicPath: 'https://venusjason.github.io/a-sprite-doc-site/',
   mode: 'site',
   logo: 'https://s4.aconvert.com/convert/p3r68-cdx67/axyt7-0km7f.svg',
