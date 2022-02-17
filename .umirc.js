@@ -12,7 +12,7 @@ const pkgList = readdirSync(join(__dirname, 'packages')).filter(
 console.log(pkgList);
 
 const alias = pkgList.reduce((pre, pkg) => {
-  pre[`@sprite/${pkg}`] = join(__dirname, 'packages', pkg, 'src/index.tsx');
+  pre[`@a-sprite/${pkg}`] = join(__dirname, 'packages', pkg, 'src/index.tsx');
   return {
     ...pre,
   };
@@ -29,7 +29,7 @@ const isProduction = process.env.NODE_ENV === 'production';
 const isDeploy = process.env.SITE_DEPLOY === 'TRUE';
 
 export default {
-  title: 'Sprite',
+  title: 'a-sprite',
   mode: 'site',
   logo: 'https://s4.aconvert.com/convert/p3r68-cdx67/axyt7-0km7f.svg',
   extraBabelPlugins: [
@@ -95,7 +95,7 @@ export default {
       null,
       {
         title: 'gitlab',
-        path: 'http://gitlab.d.bowuyoudao.com/bwfe-pkgs/sprite-components',
+        path: 'http://gitlab.d.bowuyoudao.com/bwfe-pkgs/a-sprite-components',
       },
     ],
   },
