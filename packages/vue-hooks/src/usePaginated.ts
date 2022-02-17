@@ -5,7 +5,7 @@ import { ElTableColumn as PlusTableColumn } from 'element-plus'
 
 const TableColumn = isVue2
   ? TableColumnV2
-  : PlusTableColumn;
+  : PlusTableColumn
 
 import useRequest, { IOptions } from './useRequest';
 
