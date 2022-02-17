@@ -3,7 +3,7 @@ import { ref, Ref, watch, onUnmounted, WatchSource } from 'vue-demi';
 import { throttle, debounce } from 'lodash-es';
 
 class PromiseWithAbort {
-  constructor(fn) {
+  constructor(fn: any) {
     let _abort = null;
     let _p = new Promise((res, rej) => {
       fn.call(null, res, rej);
@@ -16,10 +16,6 @@ class PromiseWithAbort {
     return _p;
   }
 }
-
-type AnyObject = {
-  [key: string]: any;
-};
 
 export interface IOptions {
   /** 手动调用 */
@@ -173,6 +169,7 @@ export default <T>(service: IService<T>, options?: IOptions): UseRequestReturn<T
 
     try {
       const response = await cacheServices.get(cacheKey)?.p;
+      // @ts-ignore
       cacheServices.set(cacheKey, {
         ...cacheServices.get(cacheKey),
         request: [...args],
@@ -182,15 +179,19 @@ export default <T>(service: IService<T>, options?: IOptions): UseRequestReturn<T
       return Promise.reject(e);
     }
 
-    const { timestamp, response } = cacheServices.get(cacheKey);
+    const a = cacheServices.get(cacheKey);
+    const { timestamp, response } = a as Exclude<typeof a, undefined>;
 
     // 超时 或 入参变更 ，删除缓存 重新请求
-    if (currentT - timestamp > cacheTime && cacheTime > 0) {
+    if (currentT - (timestamp || 0) > cacheTime && cacheTime > 0) {
+      // @ts-ignore
       cacheServices.get(cacheKey).timestamp = null;
+      // @ts-ignore
       cacheServices.get(cacheKey).response = null;
       return serviceCacheFn(...args);
     }
 
+    // @ts-ignore
     Array.from(cacheServices.get(cacheKey).runs).forEach(([currentUuid, dataRef]) => {
       if (uuid !== currentUuid) {
         dataRef.data.value = response;
@@ -203,14 +204,16 @@ export default <T>(service: IService<T>, options?: IOptions): UseRequestReturn<T
   // 重置缓存
   const reset = () => {
     if (isCacheMode) {
-      cacheServices.get(cacheKey).timestamp = null;
-      cacheServices.get(cacheKey).response = null;
+      // @ts-ignore
+      cacheServices.get(cacheKey)?.timestamp = null;
+      // @ts-ignore
+      cacheServices.get(cacheKey)?.response = null;
     }
     return run();
   };
 
-  const fn = (...args) =>
-    new PromiseWithAbort((resolve, reject) => {
+  const fn = (...args: any[]) =>
+    new PromiseWithAbort((resolve: any, reject: any) => {
       serviceCacheFn(...args)
         .then((res) => {
           resolve(res);
@@ -220,7 +223,7 @@ export default <T>(service: IService<T>, options?: IOptions): UseRequestReturn<T
         });
     });
 
-  let prevService;
+  let prevService: any;
 
   let run = async (...args: unknown[]) => {
     if (loading.value) {
@@ -269,7 +272,7 @@ export default <T>(service: IService<T>, options?: IOptions): UseRequestReturn<T
   watch(
     options.refreshDeps || [],
     () => {
-      if (!options.manual) {
+      if (!options?.manual) {
         run();
       }
     },
@@ -279,7 +282,7 @@ export default <T>(service: IService<T>, options?: IOptions): UseRequestReturn<T
   onUnmounted(() => {
     if (isCacheMode) {
       // 防止内存泄露
-      cacheServices.get(cacheKey).runs.delete(uuid);
+      cacheServices.get(cacheKey)?.runs.delete(uuid);
     }
   });
 
