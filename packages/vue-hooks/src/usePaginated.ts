@@ -1,4 +1,4 @@
-import { reactive, ref, toRefs, h as renderH, isVue2, watch } from 'vue-demi';
+import { reactive, ref, toRefs, h as renderH, isVue2, watch, Ref } from 'vue-demi';
 
 // import { TableColumn } from 'element-ui'
 // import { ElTableColumn as PlusTableColumn } from 'element-plus'
@@ -81,7 +81,7 @@ const ColumnItem = <T>(columnItem: IElTableColumnItem<T>) => {
  */
 export const JsxElTableColumns = <T>(columns: IElTableColumnItem<T>[]) => columns.map(ColumnItem);
 
-export default <K>(tableService: ITableService<K>, options?: IOptions) => {
+export default function <K>(tableService: ITableService<K>, options?: IOptions) {
   const pagination = reactive<IPagination & { total: number }>({
     currentPage: 1,
     pageSize: 10,
@@ -93,7 +93,7 @@ export default <K>(tableService: ITableService<K>, options?: IOptions) => {
     pageSize: GLOBAL_PAGINATION_OPTION.pageSize,
   });
 
-  const tableData = ref<K[]>([]);
+  const tableData: Ref<K[]> = ref([]);
 
   const runService = async ({
     currentPage,
@@ -163,7 +163,7 @@ export default <K>(tableService: ITableService<K>, options?: IOptions) => {
     },
   );
 
-  watch(options.refreshDeps || [], () => {
+  watch(options?.refreshDeps || [], () => {
     run({
       currentPage: 1,
       pageSize: pagination.pageSize,
