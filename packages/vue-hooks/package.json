@@ -1,7 +1,7 @@
 {
   "name": "@sprite/vue-hooks",
-  "version": "0.1.6-beta.1",
-  "description": "erhai 前端组件库",
+  "version": "0.2.0-beta.0",
+  "description": "sprite 前端组件库",
   "main": "entry.js",
   "typings": "dist/index.d.ts",
   "unpkg": "dist/index.js",
