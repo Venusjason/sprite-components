@@ -9,6 +9,9 @@
     "dist"
   ],
   "is-vca-component": true,
+  "publishConfig": {
+    "access": "public"
+  },
   "peerDependencies": {
     "element-plus": "*",
     "element-ui": "*",

@@ -6,6 +6,9 @@
   "workspaces": [
     "packages/*"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "bootstrap": "node ./scripts/bootstrap.js",
     "build": "npm run build-lib && node ./scripts/gen_less_entry.js",
