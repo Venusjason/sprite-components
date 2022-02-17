@@ -1,1 +1,3 @@
-# `@weier/w-vue-hooks`
+# `@sprite/vue-hooks`
+
+vue composition-api
