@@ -1,11 +1,9 @@
 import { reactive, ref, toRefs, h as renderH, isVue2, watch, Ref } from 'vue-demi';
 
-import { TableColumn as TableColumnV2 } from 'element-ui'
-import { ElTableColumn as PlusTableColumn } from 'element-plus'
+import { TableColumn as TableColumnV2 } from 'element-ui';
+import { ElTableColumn as PlusTableColumn } from 'element-plus';
 
-const TableColumn = isVue2
-  ? TableColumnV2
-  : PlusTableColumn
+const TableColumn = isVue2 ? TableColumnV2 : PlusTableColumn;
 
 import useRequest, { IOptions } from './useRequest';
 
@@ -183,4 +181,4 @@ export default function <K>(tableService: ITableService<K>, options?: IOptions) 
       on: onPaginationChange,
     }),
   };
-};
+}

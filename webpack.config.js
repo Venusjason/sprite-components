@@ -128,18 +128,18 @@ tailPkgs.forEach((pkg) => {
         'react-dom': 'ReactDOM',
         antd: 'antd',
         moment: 'moment',
-        'vue': {
+        vue: {
           commonjs: 'vue',
-          amd: 'vue'
+          amd: 'vue',
         },
         'element-ui': {
-          commonjs: 'element-ui'
+          commonjs: 'element-ui',
         },
         'element-plus': {
-          commonjs: 'element-plus'
+          commonjs: 'element-plus',
         },
         'vue-demi': {
-          commonjs: 'vue-demi'
+          commonjs: 'vue-demi',
         },
         ...externals,
       },
