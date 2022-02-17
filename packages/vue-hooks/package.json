@@ -1,6 +1,6 @@
 {
   "name": "@a-sprite/vue-hooks",
-  "version": "0.2.0-beta.4",
+  "version": "0.2.0-beta.5",
   "description": "a-sprite 前端组件库",
   "main": "entry.js",
   "typings": "dist/index.d.ts",
