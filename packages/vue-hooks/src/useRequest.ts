@@ -205,9 +205,9 @@ export default <T>(service: IService<T>, options?: IOptions): UseRequestReturn<T
   const reset = () => {
     if (isCacheMode) {
       // @ts-ignore
-      cacheServices.get(cacheKey)?.timestamp = null;
+      cacheServices.get(cacheKey).timestamp = null;
       // @ts-ignore
-      cacheServices.get(cacheKey)?.response = null;
+      cacheServices.get(cacheKey).response = null;
     }
     return run();
   };
