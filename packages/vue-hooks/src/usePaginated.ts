@@ -1,11 +1,11 @@
 import { reactive, ref, toRefs, h as renderH, isVue2, watch, Ref } from 'vue-demi';
 
-// import { TableColumn } from 'element-ui'
-// import { ElTableColumn as PlusTableColumn } from 'element-plus'
+import { TableColumn as TableColumnV2 } from 'element-ui'
+import { ElTableColumn as PlusTableColumn } from 'element-plus'
 
 const TableColumn = isVue2
-  ? require('element-ui')['TableColumn']
-  : require('element-ui')['ElTableColumn'];
+  ? TableColumnV2
+  : PlusTableColumn;
 
 import useRequest, { IOptions } from './useRequest';
 
