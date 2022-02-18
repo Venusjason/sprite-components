@@ -30,8 +30,8 @@ const isDeploy = process.env.SITE_DEPLOY === 'TRUE';
 
 export default {
   title: 'a-sprite',
-  base: '/a-sprite-doc-site/',
-  publicPath: 'https://venusjason.github.io/a-sprite-doc-site/',
+  base: !isProduction ? '/' : '/a-sprite-doc-site/',
+  publicPath: !isProduction ? '/' : 'https://venusjason.github.io/a-sprite-doc-site/',
   mode: 'site',
   logo: 'https://s4.aconvert.com/convert/p3r68-cdx67/axyt7-0km7f.svg',
   extraBabelPlugins: [
@@ -96,8 +96,8 @@ export default {
     'zh-CN': [
       null,
       {
-        title: 'gitlab',
-        path: 'http://gitlab.d.bowuyoudao.com/bwfe-pkgs/a-sprite-components',
+        title: 'github',
+        path: 'https://github.com/Venusjason/sprite-components',
       },
     ],
   },

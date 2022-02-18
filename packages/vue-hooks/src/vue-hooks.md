@@ -10,6 +10,9 @@ nav:
 # `@a-sprite/vue-hooks`
 
 * 结合vue3 hooks语法（支持vue2 + composition-api）, `usePaginated` 可以用来替换 `QueryTable` 组件，使用hooks组件可以达到ui层的最大自定义
+* api 设计借鉴了 [ahooks](https://ahooks.js.org/)
+* 在vue2、vue3 版本使用上，需要依赖[vue-demi](https://www.npmjs.com/package/vue-demi) , 需要使用者对vue-demi有一定了解
+
 
 ```
 // 安装
@@ -20,7 +23,7 @@ npm i @a-sprite/vue-hooks -S
 ## 基础用法
 > 简单说明（可选）
 
-```
+```tsx | pure
 
 import {
   defineComponent
@@ -65,7 +68,130 @@ export default defineComponent({
 > 缓存模式， 适用于不频繁更新的数据（如枚举、权限、菜单），缓存有效期内 & 参数不变，多次调用会直接使用缓存结果
 requireCode("~packages/w-vue-hooks/examples/useCache.tsx")
 
+```tsx | pure
+import { defineComponent } from '@vue/composition-api';
+
+import { useRequest } from '@weier/w-vue-hooks';
+
+type Res = { num: string };
+
+const sleep = (delay = 3000) =>
+  new Promise((r) => {
+    setTimeout(() => {
+      r();
+    }, delay);
+  });
+
+const service = (num): Promise<Res> => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve({
+        num: (num || Math.ceil(Math.random() * 1000)).toString(),
+      });
+    }, 300);
+  });
+};
+
+// 缓存在 5000ms 后失效
+
+const Example = defineComponent({
+  setup() {
+    return useRequest<Res>(service, {
+      cacheKey: Symbol('cache A'),
+      cacheTime: 5000,
+    });
+  },
+  render() {
+    return (
+      <div>
+        <el-button type="primary" loading={this.loading} onClick={this.run}>
+          按钮
+        </el-button>{' '}
+        {JSON.stringify(this.data, null, 2)}
+      </div>
+    );
+  },
+});
+
+const getUserInfo = async () => {
+  await sleep();
+  console.log('getUserInfo');
+  const t = new Date().getTime();
+  const joinTime = '2021-01-01 00:00:00';
+  const serviedTime = t - new Date(joinTime).getTime();
+  return {
+    nick: '客服1号',
+    gender: '男',
+    joinTime,
+    serviedTime,
+  };
+};
+
+const CACHE_KEY_USER = Symbol('CACHE_KEY_USER');
+
+const CACHE_KEY_USER_OPT = {
+  cacheKey: CACHE_KEY_USER,
+  cacheTime: 6000,
+};
+
+const UserName = defineComponent({
+  setup() {
+    const { data, loading, run } = useRequest(getUserInfo, CACHE_KEY_USER_OPT);
+
+    return () => (
+      <div>
+        <span>昵称： {loading.value ? '...' : data.value?.nick}</span>
+        <el-button onClick={run}>查询</el-button>
+      </div>
+    );
+  },
+});
+
+const UserGender = defineComponent({
+  setup() {
+    const { data, loading, reset } = useRequest(getUserInfo, CACHE_KEY_USER_OPT);
+
+    return () => (
+      <div>
+        性别： {loading.value ? '...' : data.value?.gender}
+        <el-button onClick={reset}>reset刷新</el-button>
+      </div>
+    );
+  },
+});
+
+const UserJoinTime = defineComponent({
+  setup() {
+    const { data, loading } = useRequest(getUserInfo, CACHE_KEY_USER_OPT);
+
+    return () => (
+      <div>
+        <div>入职时间： {loading.value ? '...' : data.value?.joinTime}</div>
+        <div>已工作： {loading.value ? '...' : data.value?.serviedTime}</div>
+      </div>
+    );
+  },
+});
+
+export default defineComponent({
+  render() {
+    return (
+      <div>
+        <Example />
+        <p>并发模式示例</p>
+        <div>
+          <UserName />
+          <UserGender />
+          <UserJoinTime />
+        </div>
+      </div>
+    );
+  },
+});
+
 ```
+
+``` tsx | pure
 import {
   defineComponent,
   ref,
@@ -176,7 +302,7 @@ export default QueryTable
 
 - 设置分页全局参数，属性参考 `el-pagination` 组件
 
-```
+```js
 import { setGlobalPaginationOption } from '@weier/w-vue-hooks'
 
 setGlobalPaginationOption({
@@ -189,7 +315,7 @@ setGlobalPaginationOption({
 
 - `el-table-column` 组件的jsx版本
 
-```
+```tsx | pure
 import { JsxElTableColumns } from '@weier/w-vue-hooks'
 
 const colunms = [
@@ -226,7 +352,7 @@ const colunms = [
 | throttleInterval |  节流 delay  | number | - |  0  |
 
 
-```
+``` ts
 export type IService<T> = (...args: any[]) => Promise<T>
 
 export interface IOptions {
@@ -288,7 +414,7 @@ export interface IOptions {
 ## usePaginated Option
 
 - el-pagination api
-```
+``` ts
 
 interface IPaginatedOption extends IRequestOption {
   small: boolean;
@@ -308,9 +434,174 @@ interface IPaginatedOption extends IRequestOption {
 
 requireCode("~packages/w-vue-hooks/examples/useLoadMore.tsx")
 
+```tsx | pure
+import { defineComponent } from 'vue-demi';
+import { useLoadMore, ILoadMoreResponse } from '@weier/w-vue-hooks';
+// 使用require code 语法
+
+const resultData = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+export async function getLoadMoreList(
+  { nextId, list } = {},
+  limit: any,
+): Promise<ILoadMoreResponse> {
+  let start = 0;
+  if (nextId) {
+    start = resultData.findIndex((i) => i === nextId);
+  }
+  const end = start + limit;
+  const results = resultData.slice(start, end).map((id) => ({
+    id,
+    name: `project ${id} (server time: ${Date.now()})`,
+  }));
+  const nId = resultData.length >= end ? resultData[end] : undefined;
+
+  await $sleep(1000);
+
+  return {
+    list: [...(list || []), ...results],
+    nextId: nId,
+  };
+}
+
+export default defineComponent({
+  setup() {
+    const { loadMore, reload, data, loading } = useLoadMore((d) => getLoadMoreList(d, 3), {
+      cacheKey: 'loadMore',
+    });
+    return {
+      loading,
+      data,
+      loadMore,
+      reload,
+    };
+  },
+  render() {
+    const { loading, data, loadMore, reload } = this;
+    return (
+      <div>
+        <ul>
+          {data?.list?.map((item) => (
+            <li key={item.id}>
+              {item.id} - {item.name}
+            </li>
+          ))}
+        </ul>
+        <el-button type="button" onClick={loadMore} disabled={!data?.nextId}>
+          {loading ? 'loading' : data?.nextId ? 'click to load more' : 'no more'}
+        </el-button>
+        <el-button type="primary" onClick={reload} disabled={!!data?.nextId}>
+          reload
+        </el-button>
+      </div>
+    );
+  },
+});
+
+```
+
 > 上拉自动加载 & 依赖项变更自动重新加载
 
 requireCode("~packages/w-vue-hooks/examples/useLoadMoreRef.tsx")
+
+```tsx | pure
+import { defineComponent, ref, reactive } from 'vue-demi';
+import { useLoadMore, ILoadMoreResponse } from '@weier/w-vue-hooks';
+// 使用require code 语法
+const dataSource = [];
+for (let i = 0; i < 10000; i++) {
+  dataSource.push({
+    id: i,
+    title: `use load more , id ${i}`,
+  });
+}
+
+export default defineComponent({
+  setup() {
+    const containerRef = ref(null);
+    const refreshDeps = reactive({
+      minId: 5,
+      maxId: 20,
+    });
+
+    const asyncFn = async ({ pageSize = 5, pageIndex = 0, list = [] }: any = {}): Promise<
+      ILoadMoreResponse<any>
+    > => {
+      const { minId, maxId } = refreshDeps;
+      let results = dataSource.filter(({ id }) => {
+        return id > minId && id <= maxId;
+      });
+
+      const total = results.length;
+
+      pageIndex++;
+
+      results = results.slice((pageIndex - 1) * pageSize, pageIndex * pageSize) || [];
+
+      await $sleep(2000);
+
+      const arr = [...list, ...results];
+
+      return {
+        total,
+        list: arr,
+        pageSize,
+        pageIndex,
+      };
+    };
+
+    const { loadMore, reload, data, noMore, loading } = useLoadMore(asyncFn, {
+      ref: containerRef,
+      isNoMore: (d) => (d ? d?.list?.length >= d.total : false),
+      refreshDeps: () => [refreshDeps.minId, refreshDeps.maxId],
+      throttleInterval: 800,
+    });
+
+    return {
+      loading,
+      data,
+      loadMore,
+      noMore,
+      reload,
+      containerRef,
+      refreshDeps,
+    };
+  },
+  render() {
+    const { loading, data, loadMore, reload, noMore } = this;
+    return (
+      <div>
+        <el-card>
+          <p>查询条件</p>
+          minId :{this.refreshDeps.minId}{' '}
+          <el-input-number v-model={this.refreshDeps.minId} min={0} max={10000}></el-input-number>
+          maxId : {this.refreshDeps.maxId}
+          <el-input-number v-model={this.refreshDeps.maxId} min={0} max={10000}></el-input-number>
+          <el-button type="primary" onClick={reload} disabled={loading}>
+            Reload
+          </el-button>
+        </el-card>
+        <ul ref="containerRef" style={{ height: '200px', overflowY: 'auto' }}>
+          {data.list.map((item) => (
+            <li style={{ height: 50, borderBottom: '1px', lineHeight: '50px' }}>{item.title}</li>
+          ))}
+        </ul>
+        <div>
+          {!noMore && (
+            <el-button type="button" onClick={loadMore} disabled={loading}>
+              {loading ? 'Loading more...' : 'Click to load more'}
+            </el-button>
+          )}
+
+          {noMore && <span>No more data</span>}
+
+          <span style={{ float: 'right', fontSize: 12 }}>total: {data?.total}</span>
+        </div>
+      </div>
+    );
+  },
+});
+
+```
 
 
 ```ts

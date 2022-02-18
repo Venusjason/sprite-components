@@ -2,9 +2,9 @@
   "name": "@a-sprite/vue-hooks",
   "version": "0.2.0-beta.5",
   "description": "a-sprite 前端组件库",
-  "main": "entry.js",
-  "typings": "dist/index.d.ts",
-  "unpkg": "dist/index.js",
+  "main": "es/index.js",
+  "typings": "es/index.d.ts",
+  "unpkg": "lib/index.js",
   "files": [
     "dist"
   ],
