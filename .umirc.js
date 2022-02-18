@@ -134,7 +134,7 @@ export default {
       },
       {
         title: '通用',
-        children: ['vue-hooks'],
+        children: ['vue-hooks', 'x-storage', 'set-memory-service'],
       },
     ],
   },

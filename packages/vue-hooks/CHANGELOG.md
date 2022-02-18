@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-beta.6](https://github.com/Venusjason/sprite-components/compare/@a-sprite/vue-hooks@0.2.0-beta.5...@a-sprite/vue-hooks@0.2.0-beta.6) (2022-02-18)
+
+### Bug Fixes
+
+- pkg ([65b24f3](https://github.com/Venusjason/sprite-components/commit/65b24f3e9ad13efb3a748c4efee9468b524d2b39))
+
+### Features
+
+- doc dist ([e087234](https://github.com/Venusjason/sprite-components/commit/e087234ff5e535dc6a32fdc3a1166b344b8787c8))
+
 # 0.2.0-beta.5 (2022-02-17)
 
 ### Bug Fixes
