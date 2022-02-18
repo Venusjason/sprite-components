@@ -21,12 +21,12 @@ nav:
 
 ### api 设计
 
-| api                           | 参数                 | 说明               |     |
-| ----------------------------- | -------------------- | ------------------ | --- |
-| setItem                       | (key, value) => void | 类似 localstorage.setItem, 可以支持常见对象存储 |
-| getItem                       | (key) => value       |  类似 localstorage.getItem                  |     |
-| resetItem                     | (key) => void        | 恢复某个属性初始值 |     |
-| resetAll                      | () => void           | 恢复所有属性初始值 |     |
+| api       | 参数                 | 说明                                            |     |
+| --------- | -------------------- | ----------------------------------------------- | --- |
+| setItem   | (key, value) => void | 类似 localstorage.setItem, 可以支持常见对象存储 |
+| getItem   | (key) => value       | 类似 localstorage.getItem                       |     |
+| resetItem | (key) => void        | 恢复某个属性初始值                              |     |
+| resetAll  | () => void           | 恢复所有属性初始值                              |     |
 
 ​
 
@@ -182,8 +182,6 @@ export const xSessionStorage = new XStorage<typeof defaultSessionStorage>(
 
 ![image.png](https://cdn.nlark.com/yuque/0/2022/png/247808/1642579978883-9b4b52a3-cf70-4728-8e05-f10d2a4a708f.png#clientId=uc945c988-df7e-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=148&id=uf1b2546e&margin=%5Bobject%20Object%5D&name=image.png&originHeight=296&originWidth=480&originalType=binary&ratio=1&rotation=0&showTitle=false&size=37433&status=done&style=none&taskId=u9d31d525-9cb4-4fd5-88db-fa82877f97d&title=&width=240) 点击后 ![image.png](https://cdn.nlark.com/yuque/0/2022/png/247808/1642580005049-a27810ff-e9ef-4be6-a2a9-f62be976c2ee.png#clientId=uc945c988-df7e-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=133&id=u6789ddf8&margin=%5Bobject%20Object%5D&name=image.png&originHeight=266&originWidth=484&originalType=binary&ratio=1&rotation=0&showTitle=false&size=35834&status=done&style=none&taskId=u4d40827d-0fe5-4a17-aea5-d4acaa12b6f&title=&width=242) 刷新一下 ![image.png](https://cdn.nlark.com/yuque/0/2022/png/247808/1642580026180-7254cd74-8581-4afe-a436-e5e5bedfbf1a.png#clientId=uc945c988-df7e-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=137&id=u41f1d2f6&margin=%5Bobject%20Object%5D&name=image.png&originHeight=274&originWidth=512&originalType=binary&ratio=1&rotation=0&showTitle=false&size=37995&status=done&style=none&taskId=u67f2ef44-1415-4eb6-a4cd-6132fdc668c&title=&width=256)
 
-
-
- [代码地址](https://codesandbox.io/s/throbbing-waterfall-52fre?file=/src/views/Home.tsx) ​
+[代码地址](https://codesandbox.io/s/throbbing-waterfall-52fre?file=/src/views/Home.tsx) ​
 
 ​
