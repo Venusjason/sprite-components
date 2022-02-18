@@ -1,6 +1,18 @@
 # Change Log
 
-All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+All notable changes to this project will be documented in this file.
+See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.2.0-beta.7](https://github.com/Venusjason/sprite-components/compare/@a-sprite/vue-hooks@0.2.0-beta.6...@a-sprite/vue-hooks@0.2.0-beta.7) (2022-02-18)
+
+
+### Features
+
+* x-storage ([f9b8b0e](https://github.com/Venusjason/sprite-components/commit/f9b8b0e6f3483d6149018e7def013c5f9475d3da))
+
+
+
+
 
 # [0.2.0-beta.6](https://github.com/Venusjason/sprite-components/compare/@a-sprite/vue-hooks@0.2.0-beta.5...@a-sprite/vue-hooks@0.2.0-beta.6) (2022-02-18)
 

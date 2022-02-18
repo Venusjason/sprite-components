@@ -1,6 +1,6 @@
 {
   "name": "@a-sprite/x-storage",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "a-sprite 前端组件库 缓存",
   "main": "es/index.js",
   "typings": "es/index.d.ts",
