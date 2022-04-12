@@ -9,7 +9,7 @@ export default class XStorage<T extends object> {
 
   length = 0;
 
-  /** 数据初始化存入值，方便使用resetItem */
+  /** 数据初始化存入值，方便使用resetItem  */
   private _initalValue: T;
 
   private easyClone(data: object) {
