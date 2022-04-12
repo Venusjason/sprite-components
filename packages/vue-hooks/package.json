@@ -6,7 +6,9 @@
   "typings": "es/index.d.ts",
   "unpkg": "lib/index.js",
   "files": [
-    "dist"
+    "dist",
+    "es",
+    "lib"
   ],
   "is-vca-component": true,
   "publishConfig": {
