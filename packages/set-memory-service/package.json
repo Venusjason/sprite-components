@@ -1,6 +1,6 @@
 {
   "name": "@a-sprite/set-memory-service",
-  "version": "0.3.1",
+  "version": "0.4.0",
   "description": "a-sprite 前端组件库 接口缓存",
   "main": "es/index.js",
   "typings": "es/index.d.ts",
